@@ -3,6 +3,7 @@ package com.luv2code.springboot.demo.myCoolApp.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,12 +11,12 @@ import com.luv2code.springboot.demo.myCoolApp.dao.EmployeeDao;
 import com.luv2code.springboot.demo.myCoolApp.entity.EmployeeEntity;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
-	
+public class EmployeeServiceImpl implements EmployeeService {
+
 	private EmployeeDao empDao;
-	
+
 	@Autowired
-	public EmployeeServiceImpl(EmployeeDao empDao) {
+	public EmployeeServiceImpl(@Qualifier("employeeDaoJPAImpl") EmployeeDao empDao) {
 		this.empDao = empDao;
 	}
 
@@ -33,14 +34,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	@Transactional
-	public void saveEmployee(EmployeeEntity theEmployee) {
+	public List<EmployeeEntity> saveEmployee(EmployeeEntity theEmployee) {
 		empDao.saveEmployee(theEmployee);
+		return findAll();
 	}
 
 	@Override
 	@Transactional
-	public void deleteById(int theId) {
+	public List<EmployeeEntity> deleteById(int theId) {
 		empDao.deleteById(theId);
+		return findAll();
 	}
-	
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ public class EmployeeDaoHibernateImpl implements EmployeeDao {
 	
 	@Override
 	public List<EmployeeEntity> findAll() {
+		System.out.println("In hhibernate class");
 		//get the current hibernate session
 		Session currentSession = entityManager.unwrap(Session.class);
 		//create a query
@@ -45,7 +47,6 @@ public class EmployeeDaoHibernateImpl implements EmployeeDao {
 		EmployeeEntity emp = currentSession.get(EmployeeEntity.class, theId);
 		
 		//execute the query
-		
 		return emp;
 	}
 
@@ -53,7 +54,7 @@ public class EmployeeDaoHibernateImpl implements EmployeeDao {
 	public void saveEmployee(EmployeeEntity theEmployee) {
 		// get the session
 		Session currentSession = entityManager.unwrap(Session.class);
-		
+		System.out.println("Employee : " + theEmployee);
 		// if primary key = 0 then saves else updates
 		currentSession.saveOrUpdate(theEmployee);
 		

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class EmployeeEntity {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="EMPLOYEE_NUMBER")
 	private int employeeNumber;
 	@Column(name="EMPLOYEE_NAME")
@@ -37,7 +37,7 @@ public class EmployeeEntity {
 		this.employeeNumber = employeeNumber;
 	}
 
-	public String employeeName() {
+	public String getEmployeeName() {
 		return employeeName;
 	}
 
@@ -53,11 +53,12 @@ public class EmployeeEntity {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "EmployeeEntity [employeeNumber=" + employeeNumber + ", employeeNmae=" + employeeName + ", salary="
-				+ salary + "]";
+		return "[ EmpNum : " + this.employeeNumber + 
+				" EmpName : " + this.employeeName + 
+				" EmpSal : " + this.salary + " ]";
 	}
 	
 }

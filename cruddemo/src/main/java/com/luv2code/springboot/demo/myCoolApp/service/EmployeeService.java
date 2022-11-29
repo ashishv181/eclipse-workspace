@@ -10,7 +10,7 @@ public interface EmployeeService {
 
 	public EmployeeEntity findById(int theId);
 
-	public void saveEmployee(EmployeeEntity theEmployee);
+	public List<EmployeeEntity> saveEmployee(EmployeeEntity theEmployee);
 
-	public void deleteById(int theId);
+	public List<EmployeeEntity> deleteById(int theId);
 }
